@@ -1,6 +1,7 @@
 class Vendor < ApplicationRecord
   belongs_to :city
   has_one :country, through: :city
+  has_many :products
   enum type: { individual: "individual", business: "business" }
 
   validates :full_name, :city_id, :full_name, :email, :cell_number, presence: true

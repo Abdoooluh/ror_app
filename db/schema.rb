@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_10_072816) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_10_083716) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.integer "country_id", null: false
@@ -23,6 +23,25 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_10_072816) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "product_id", null: false
+    t.string "order_number"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_orders_on_product_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "sku"
+    t.integer "vendor_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["vendor_id"], name: "index_products_on_vendor_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,6 +70,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_10_072816) do
   end
 
   add_foreign_key "cities", "countries"
+  add_foreign_key "orders", "products"
+  add_foreign_key "orders", "users"
+  add_foreign_key "products", "vendors"
   add_foreign_key "users", "cities"
   add_foreign_key "vendors", "cities"
 end
