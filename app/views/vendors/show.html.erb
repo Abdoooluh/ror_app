@@ -1,0 +1,27 @@
+<p>
+  <strong>Name:</strong>
+  <%= @vendor.name %>
+</p>
+
+<p>
+  <strong>Full Name:</strong>
+  <%= @vendor.full_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @vendor.email %>
+</p>
+
+<p>
+  <strong>Cell Number:</strong>
+  <%= @vendor.cell_number %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @vendor.type.humanize %>
+</p>
+
+<%= link_to 'Edit', edit_vendor_path(@vendor) %> |
+<%= link_to 'Back', vendors_path %>
