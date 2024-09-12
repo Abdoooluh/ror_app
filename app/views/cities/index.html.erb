@@ -6,11 +6,15 @@
 
 <div id="cities">
   <% @cities.each do |city| %>
-    <%= render city %>
-    <p>
-      <button class="btn btn-outline-primary"><%= link_to "Show this city", city, style: 'color:white; text-decoration:none' %></button>
-    </p>
-  <% end %>
+    <div class="row">
+      <div class="col-md-3 mb-3">
+        <%= city.name %>
+      </div>
+      <div class="col-md-3 mb-3">
+          <%= link_to "Show this city", city, class: 'btn btn-outline-success' %>
+      </div>
+    </div>
+        <% end %>
 </div>
 
-<button class="btn btn-outline-warning"><%= link_to "New city", new_city_path, style: 'color:white; text-decoration:none' %></button>
+<%= link_to "New city", new_city_path, class: 'btn btn-outline-primary' %>
