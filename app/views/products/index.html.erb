@@ -1,13 +1,30 @@
 <p style="color: green"><%= notice %></p>
 
 <% content_for :title, "Products" %>
+  <h1>Products</h1>
 
-<h1>Products</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Sku</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Unit Cost</th>
+        <th>Vendor</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
 
 <div id="products">
   <% @products.each do |product| %>
     <%= render product %>
   <% end %>
 </div>
+    </tbody>
+  </table>
 
 <button class="btn btn-outline-primary"><%= link_to "New product", new_product_path, style: 'color:white; text-decoration:none' %></button>
+
+

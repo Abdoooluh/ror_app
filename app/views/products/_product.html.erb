@@ -1,19 +1,4 @@
-<h1>Products</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Sku</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Unit Cost</th>
-      <th>Vendor</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @products.each do |product| %>
       <tr>
         <td><%= product.sku %></td>
         <td><%= product.name %></td>
@@ -32,7 +17,3 @@
           </button>
         </td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-

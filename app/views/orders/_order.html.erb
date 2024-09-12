@@ -1,23 +1,9 @@
-<h1>Orders</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Order Number</th>
-      <th>Status</th>
-      <th>Purchaser</th>
-      <th>Product</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @orders.each do |order| %>
       <tr>
         <td><%= order.id %></td>
+        <td><%= order.product&.name || "Product not found" %></td>
         <td><%= order.status %></td>
         <td><%= order.user&.full_name || "User not found" %></td>
-        <td><%= order.product&.name || "Product not found" %></td>
         <td>
           <button class="btn btn-outline-success">
             <%= link_to 'Details', order, style: 'color: white; text-decoration: none' %>
@@ -30,7 +16,3 @@
           </button>
         </td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-

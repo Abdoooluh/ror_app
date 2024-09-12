@@ -4,10 +4,25 @@
 
 <h1>Orders</h1>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th>Order Number</th>
+      <th>Product</th>
+      <th>Status</th>
+      <th>Purchaser</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
 <div id="orders">
   <% @orders.each do |order| %>
     <%= render order %>
   <% end %>
 </div>
+  </tbody>
+</table>
+
 
 <button class="btn btn-outline-primary"><%= link_to "New order", new_order_path, style: 'color:white; text-decoration:none' %></button>
