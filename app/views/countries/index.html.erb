@@ -8,9 +8,9 @@
   <% @countries.each do |country| %>
     <%= render country %>
     <p>
-      <%= link_to "Show this country", country %>
+      <button class="btn btn-outline-success"><%= link_to "Show this country", country, style: 'color:white; text-decoration:none' %></button>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New country", new_country_path %>
+<button class="btn btn-outline-primary"><%= link_to "New country", new_country_path, style: 'color:white; text-decoration:none' %></button>

@@ -8,9 +8,9 @@
   <% @products.each do |product| %>
     <%= render product %>
     <p>
-      <%= link_to "Show this product", product %>
+      <button class="btn btn-outline-success"><%= link_to "Show this product", product, style: 'color:white; text-decoration:none' %></button>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New product", new_product_path %>
+<button class="btn btn-outline-primary"><%= link_to "New product", new_product_path, style: 'color:white; text-decoration:none' %></button>

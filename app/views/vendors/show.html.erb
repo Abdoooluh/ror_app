@@ -1,9 +1,4 @@
 <p>
-  <strong>Name:</strong>
-  <%= @vendor.name %>
-</p>
-
-<p>
   <strong>Full Name:</strong>
   <%= @vendor.full_name %>
 </p>
@@ -19,9 +14,9 @@
 </p>
 
 <p>
-  <strong>Type:</strong>
-  <%= @vendor.type.humanize %>
+  <strong>Vendor Type:</strong>
+  <%= @vendor.vendor_type %>
 </p>
 
-<%= link_to 'Edit', edit_vendor_path(@vendor) %> |
-<%= link_to 'Back', vendors_path %>
+<button class="btn btn-outline-success"><%= link_to 'Edit', edit_vendor_path(@vendor), style: 'color:white; text-decoration:none' %></button> |
+<button class="btn btn-outline-warning"><%= link_to 'Back', vendors_path, style: 'color:white; text-decoration:none' %></button>

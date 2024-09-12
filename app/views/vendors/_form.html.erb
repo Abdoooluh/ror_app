@@ -11,47 +11,64 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="form-group">
+    <div class="field">
+      <%= form.label :full_name %>
+      <%= form.text_field :full_name, class: "form-control"  , class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :city_id %>
-    <%= form.collection_select :city_id, City.all, :id, :name, prompt: "Select a city" %>
+  <div class="form-group">
+    <div class="field">
+      <%= form.label :email %>
+      <%= form.email_field :email, class: "form-control"  %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :full_name %>
-    <%= form.text_field :full_name %>
+  <div class="form-group">
+    <div class="field">
+      <%= form.label :cell_number %>
+      <%= form.text_field :cell_number, class: "form-control"  %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.email_field :email %>
+  <div class="form-group">
+    <div class="field">
+      <%= form.label :password %>
+      <%= form.password_field :password, class: "form-control"  %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :cell_number %>
-    <%= form.text_field :cell_number %>
+  <div class="form-group">
+    <div class="field">
+      <%= form.label :password_confirmation %>
+      <%= form.password_field :password_confirmation, class: "form-control"  %>
+    </div>
+  </div>
+  
+  <br>
+
+  <div class="form-group">
+    <div class="field">
+      <%= form.label :city_id %>
+      <%= form.collection_select :city_id, City.all, :id, :name, prompt: "Select a city" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :type %>
-    <%= form.select :type, Vendor.types.keys.map { |type| [type.humanize, type] }, prompt: "Select type" %>
+  <br>
+
+  <div class="form-group">
+    <div class="field">
+      <%= form.label :vendor_type %>
+      <%= form.select :vendor_type, Vendor.vendor_types.keys.map { |type| [type, type] }, prompt: "Select vendor type" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
-
-  <div class="field">
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
-  </div>
+  <br>
 
   <div class="actions">
     <%= form.submit %>
   </div>
+
+  <br>
 <% end %>

@@ -3,8 +3,8 @@
 <%= render @country %>
 
 <div>
-  <%= link_to "Edit this country", edit_country_path(@country) %> |
-  <%= link_to "Back to countries", countries_path %>
-
+  <button class="btn btn-outline-success"><%= link_to "Edit this country", edit_country_path(@country), style: 'color:white; text-decoration:none' %></button> |
+  <button class="btn btn-outline-warning"><%= link_to "Back to countries", countries_path, style: 'color:white; text-decoration:none' %></button>
+<br><br>
   <%= button_to "Destroy this country", @country, method: :delete %>
 </div>

@@ -11,25 +11,28 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.label :product_id, style: "display: block" %>
-    <%= form.text_field :product_id %>
-  </div>
-
-  <div>
+  <div class="form-group">
     <%= form.label :order_number, style: "display: block" %>
-    <%= form.text_field :order_number %>
+    <%= form.text_field :order_number, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
+  <div class="form-group">
+    <%= form.label :product_id, style: "display: block" %>
+    <%= form.collection_select :product_id, Product.all, :id, :sku, prompt: "Select a Product" %>
   </div>
+
+  <div class="form-group">
+    <%= form.label :status, style: "display: block" %>
+    <%= form.select :status, Order.statuses.keys.map { |type| [type, type] }, prompt: "Select Status" %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.collection_select :user_id, User.all, :id, :full_name, prompt: "Select a User" %>
+  </div>
+
+
+<br>
 
   <div>
     <%= form.submit %>

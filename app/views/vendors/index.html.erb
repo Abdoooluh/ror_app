@@ -1,15 +1,13 @@
 <h1>Vendors</h1>
 
-<%= link_to 'New Vendor', new_vendor_path %>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Name</th>
       <th>Full Name</th>
       <th>Email</th>
       <th>Cell Number</th>
-      <th>Type</th>
+      <th>Vendor Type</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -17,17 +15,20 @@
   <tbody>
     <% @vendors.each do |vendor| %>
       <tr>
-        <td><%= vendor.name %></td>
         <td><%= vendor.full_name %></td>
         <td><%= vendor.email %></td>
         <td><%= vendor.cell_number %></td>
-        <td><%= vendor.type.humanize %></td>
+        <td><%= vendor.vendor_type %></td>
         <td>
-          <%= link_to 'Show', vendor %>
-          <%= link_to 'Edit', edit_vendor_path(vendor) %>
-          <%= link_to 'Destroy', vendor, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <button class="btn btn-outline-success"><%= link_to 'Show', vendor, style: 'color:white; text-decoration:none' %></button>
+          <button class="btn btn-outline-primary"><%= link_to 'Edit', edit_vendor_path(vendor), style: 'color:white; text-decoration:none' %></button>
+          <button class="btn btn-outline-danger"><%= link_to 'Destroy', vendor, method: :delete, data: { confirm: 'Are you sure?' }, style: 'color:white; text-decoration:none' %></button>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<br>
+
+<button class="btn btn-outline-primary"><%= link_to 'New Vendor', new_vendor_path, style: 'color:white; text-decoration:none' %></button>

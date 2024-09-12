@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_10_083716) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_12_051231) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.integer "country_id", null: false
@@ -41,6 +41,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_10_083716) do
     t.integer "vendor_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "Name"
+    t.float "Unit_Cost"
+    t.string "Description"
     t.index ["vendor_id"], name: "index_products_on_vendor_id"
   end
 
@@ -63,7 +66,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_10_083716) do
     t.string "password_digest"
     t.string "email"
     t.string "cell_number"
-    t.string "type"
+    t.string "vendor_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_vendors_on_city_id"

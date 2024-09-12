@@ -3,8 +3,8 @@
 <%= render @city %>
 
 <div>
-  <%= link_to "Edit this city", edit_city_path(@city) %> |
-  <%= link_to "Back to cities", cities_path %>
-
+  <button class="btn btn-outline-success"><%= link_to "Edit this city", edit_city_path(@city), style: 'color:white; text-decoration:none' %></button> |
+  <button class="btn btn-outline-warning"><%= link_to "Back to cities", cities_path, style: 'color:white; text-decoration:none' %></button>
+<br><br>
   <%= button_to "Destroy this city", @city, method: :delete %>
 </div>

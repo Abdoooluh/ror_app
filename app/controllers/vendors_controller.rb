@@ -31,6 +31,9 @@ class VendorsController < ApplicationController
 
   # PATCH/PUT /vendors/1
   def update
+    puts "HELLO"
+    puts vendor_params
+    puts "HELLO"
     if @vendor.update(vendor_params)
       redirect_to @vendor, notice: 'Vendor was successfully updated.'
     else
@@ -52,6 +55,6 @@ class VendorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def vendor_params
-      params.require(:vendor).permit(:name, :city_id, :full_name, :email, :cell_number, :password, :password_confirmation, :type)
+      params.require(:vendor).permit(:city_id, :full_name, :email, :cell_number, :password, :password_confirmation, :vendor_type)
     end
 end

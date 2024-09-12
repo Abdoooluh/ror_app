@@ -8,9 +8,9 @@
   <% @cities.each do |city| %>
     <%= render city %>
     <p>
-      <%= link_to "Show this city", city %>
+      <button class="btn btn-outline-primary"><%= link_to "Show this city", city, style: 'color:white; text-decoration:none' %></button>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New city", new_city_path %>
+<button class="btn btn-outline-warning"><%= link_to "New city", new_city_path, style: 'color:white; text-decoration:none' %></button>

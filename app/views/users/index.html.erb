@@ -1,11 +1,8 @@
 <h1>Users</h1>
 
-<%= link_to 'New User', new_user_path %>
-
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Name</th>
       <th>Full Name</th>
       <th>Email</th>
       <th>Cell Number</th>
@@ -16,16 +13,29 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.name %></td>
         <td><%= user.full_name %></td>
         <td><%= user.email %></td>
         <td><%= user.cell_number %></td>
         <td>
-          <%= link_to 'Show', user %>
-          <%= link_to 'Edit', edit_user_path(user) %>
-          <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+    <button class = "btn btn-outline-success">
+          <%= link_to 'Show', user, style: 'color: white; text-decoration: none' %>
+    </button>
+
+    <button class = "btn btn-outline-primary">
+          <%= link_to 'Edit', edit_user_path(user), style: 'color: white; text-decoration: none' %>
+    </button>
+
+    <button class = "btn btn-outline-danger">
+          <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }, style: 'color: white; text-decoration: none' %>
+    </button>
         </td>
       </tr>
     <% end %>
   </tbody>
+
 </table>
+
+<button class="btn btn-primary">  
+  <%= link_to 'New User', new_user_path, style: 'color: white; text-decoration: none' %>
+</button>
