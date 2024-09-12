@@ -1,30 +1,47 @@
 <p style="color: green"><%= notice %></p>
 
 <% content_for :title, "Products" %>
-  <h1>Products</h1>
 
-  <table class="table">
-    <thead>
+<h1>Products</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Sku</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Unit Cost</th>
+      <th>Vendor</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
       <tr>
-        <th>Sku</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Unit Cost</th>
-        <th>Vendor</th>
-        <th>Actions</th>
+        <td><%= product.sku %></td>
+        <td><%= product.name %></td>
+        <td><%= product.description %></td>
+        <td><%= number_to_currency(product.unit_cost) %></td>
+        <td><%= product.vendor.full_name %></td>
+        <td>
+          <button class="btn btn-outline-success">
+            <%= link_to "Show", product, style: 'color:white; text-decoration:none' %>
+          </button>
+          <button class="btn btn-outline-primary">
+            <%= link_to "Edit", edit_product_path(product), style: 'color:white; text-decoration:none' %>
+          </button>
+          <button class="btn btn-outline-danger">
+            <%= link_to "Destroy", product, method: :delete, data: { confirm: 'Are you sure?' }, style: 'color:white; text-decoration:none' %>
+          </button>
+        </td>
       </tr>
-    </thead>
+    <% end %>
+  </tbody>
+</table>
 
-    <tbody>
+<%= paginate @products %>
 
-<div id="products">
-  <% @products.each do |product| %>
-    <%= render product %>
-  <% end %>
-</div>
-    </tbody>
-  </table>
-
-<button class="btn btn-outline-primary"><%= link_to "New product", new_product_path, style: 'color:white; text-decoration:none' %></button>
-
-
+<button class="btn btn-outline-primary">
+  <%= link_to "New product", new_product_path, style: 'color:white; text-decoration:none' %>
+</button>

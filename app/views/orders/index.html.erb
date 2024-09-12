@@ -7,7 +7,6 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Order Number</th>
       <th>Product</th>
       <th>Status</th>
       <th>Purchaser</th>
@@ -16,13 +15,29 @@
   </thead>
 
   <tbody>
-<div id="orders">
-  <% @orders.each do |order| %>
-    <%= render order %>
-  <% end %>
-</div>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.product.name %></td> <!-- Assuming Product has a name attribute -->
+        <td><%= order.status %></td>
+        <td><%= order.user.full_name %></td> <!-- Assuming User has a full_name attribute -->
+        <td>
+          <button class="btn btn-outline-success">
+            <%= link_to "Show", order, style: 'color:white; text-decoration:none' %>
+          </button>
+          <button class="btn btn-outline-primary">
+            <%= link_to "Edit", edit_order_path(order), style: 'color:white; text-decoration:none' %>
+          </button>
+          <button class="btn btn-outline-danger">
+            <%= link_to "Destroy", order, method: :delete, data: { confirm: 'Are you sure?' }, style: 'color:white; text-decoration:none' %>
+          </button>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 
+<%= paginate @orders %> <!-- Pagination controls -->
 
-<button class="btn btn-outline-primary"><%= link_to "New order", new_order_path, style: 'color:white; text-decoration:none' %></button>
+<button class="btn btn-outline-primary">
+  <%= link_to "New order", new_order_path, style: 'color:white; text-decoration:none' %>
+</button>
