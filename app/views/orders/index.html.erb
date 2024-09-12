@@ -1,3 +1,31 @@
+<div style="padding-top: 30px;">
+  <%= search_form_for @q, url: orders_path, method: :get, html: { class: 'mb-4' } do |f| %>
+    <div class="row">
+    <div class="col-md-3 mb-3">
+      <%= f.label :status_eq, "Order Status", class: 'form-label' %>
+      <%= f.select :status_eq, options_for_select(Order.statuses.keys.map { |type| [type.humanize, type] }, params.dig(:q, :status_eq)), { prompt: 'Select Status' }, class: 'form-control' %>
+    </div>
+
+  
+      <div class="col-md-3 mb-3">
+        <%= f.label :product_name_cont, "Product Name", class: 'form-label' %>
+        <%= f.search_field :product_name_cont, class: 'form-control', placeholder: 'Search by product name' %>
+      </div>
+  
+      <div class="col-md-3 mb-3">
+        <%= f.label :user_full_name_cont, "Purchaser Name", class: 'form-label' %>
+        <%= f.search_field :user_full_name_cont, class: 'form-control', placeholder: 'Search by user name' %>
+      </div>
+
+      <div class="col-md-3 mb-3" style="padding-top: 30px;">
+        <%= f.submit 'Search', class: 'btn btn-primary' %>
+      </div>
+    </div>
+
+  <% end %>
+</div>
+
+
 <p style="color: green"><%= notice %></p>
 
 <% content_for :title, "Orders" %>
