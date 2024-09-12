@@ -10,15 +10,10 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="form-group">
-    <%= form.label :order_number, style: "display: block" %>
-    <%= form.text_field :order_number, class: "form-control" %>
-  </div>
-
+  
   <div class="form-group">
     <%= form.label :product_id, style: "display: block" %>
-    <%= form.collection_select :product_id, Product.all, :id, :sku, prompt: "Select a Product" %>
+    <%= form.collection_select :product_id, Product.all, :id, :name, prompt: "Select a Product" %>
   </div>
 
   <div class="form-group">

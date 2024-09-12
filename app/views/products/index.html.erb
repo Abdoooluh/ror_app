@@ -7,9 +7,6 @@
 <div id="products">
   <% @products.each do |product| %>
     <%= render product %>
-    <p>
-      <button class="btn btn-outline-success"><%= link_to "Show this product", product, style: 'color:white; text-decoration:none' %></button>
-    </p>
   <% end %>
 </div>
 

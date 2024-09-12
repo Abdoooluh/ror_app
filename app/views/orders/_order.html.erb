@@ -1,22 +1,36 @@
-<div id="<%= dom_id order %>">
-  <p>
-    <strong>User:</strong>
-    <%= order.user_id %>
-  </p>
+<h1>Orders</h1>
 
-  <p>
-    <strong>Product:</strong>
-    <%= order.product_id %>
-  </p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Order Number</th>
+      <th>Status</th>
+      <th>Purchaser</th>
+      <th>Product</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
 
-  <p>
-    <strong>Order number:</strong>
-    <%= order.order_number %>
-  </p>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= order.status %></td>
+        <td><%= order.user&.full_name || "User not found" %></td>
+        <td><%= order.product&.name || "Product not found" %></td>
+        <td>
+          <button class="btn btn-outline-success">
+            <%= link_to 'Details', order, style: 'color: white; text-decoration: none' %>
+          </button>
+          <button class="btn btn-outline-primary">
+            <%= link_to 'Edit', edit_order_path(order), style: 'color: white; text-decoration: none' %>
+          </button>
+          <button class="btn btn-outline-danger">
+            <%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }, style: 'color: white; text-decoration: none' %>
+          </button>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-  <p>
-    <strong>Status:</strong>
-    <%= order.status %>
-  </p>
-
-</div>

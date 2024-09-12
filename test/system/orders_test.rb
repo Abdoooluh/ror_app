@@ -14,7 +14,6 @@ class OrdersTest < ApplicationSystemTestCase
     visit orders_url
     click_on "New order"
 
-    fill_in "Order number", with: @order.order_number
     fill_in "Product", with: @order.product_id
     fill_in "Status", with: @order.status
     fill_in "User", with: @order.user_id
@@ -28,7 +27,6 @@ class OrdersTest < ApplicationSystemTestCase
     visit order_url(@order)
     click_on "Edit this order", match: :first
 
-    fill_in "Order number", with: @order.order_number
     fill_in "Product", with: @order.product_id
     fill_in "Status", with: @order.status
     fill_in "User", with: @order.user_id

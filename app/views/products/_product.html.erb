@@ -1,12 +1,38 @@
-<div id="<%= dom_id product %>">
-  <p>
-    <strong>Sku:</strong>
-    <%= product.sku %>
-  </p>
+<h1>Products</h1>
 
-  <p>
-    <strong>Vendor:</strong>
-    <%= product.vendor_id %>
-  </p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Sku</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Unit Cost</th>
+      <th>Vendor</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
 
-</div>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.sku %></td>
+        <td><%= product.name %></td>
+        <td><%= product.description %></td>
+        <td><%= number_to_currency(product.unit_cost) %></td>
+        <td><%= product.vendor&.full_name || "Vendor not found" %></td>
+        <td>
+          <button class="btn btn-outline-success">
+            <%= link_to 'Details', product, style: 'color: white; text-decoration: none' %>
+          </button>
+          <button class="btn btn-outline-primary">
+            <%= link_to 'Edit', edit_product_path(product), style: 'color: white; text-decoration: none' %>
+          </button>
+          <button class="btn btn-outline-danger">
+            <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, style: 'color: white; text-decoration: none' %>
+          </button>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
