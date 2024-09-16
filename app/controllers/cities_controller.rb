@@ -66,6 +66,15 @@ class CitiesController < ApplicationController
     redirect_to cities_url, alert: "An error occurred while trying to delete the city."
   end
 
+  def getCityDetails
+    if params[:country_id]
+      cities = City.where(country_id: params[:country_id])
+      render json: cities
+    else
+      render json: []
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_city
