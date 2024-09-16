@@ -1,7 +1,7 @@
 <%= form_with(model: user, local: true) do |form| %>
   <div class="form-group">
     <% if user.errors.any? %>
-      <div id="error_explanation">
+      <div id="error_explanation" style= "color: red;">
         <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
         <ul>
           <% user.errors.full_messages.each do |message| %>

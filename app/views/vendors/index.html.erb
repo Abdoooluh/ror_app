@@ -20,9 +20,9 @@
         <td><%= vendor.cell_number %></td>
         <td><%= vendor.vendor_type %></td>
         <td style="display: flex; gap: 5px;">
-            <%= button_to 'Show', vendor, class: 'btn btn-outline-success', style: 'margin: 0;' %>
-            <%= button_to 'Edit', edit_vendor_path(vendor), class: 'btn btn-outline-primary', style: 'margin: 0;' %>
-            <%= button_to 'Destroy', vendor, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger', style: 'margin: 0;' %>
+            <%= button_to 'Show', vendor_path(vendor), method: :get, class: 'btn btn-outline-success', style: 'margin: 0;' %>
+            <%= button_to 'Edit', edit_vendor_path(vendor), method: :get, class: 'btn btn-outline-primary', style: 'margin: 0;' %>
+            <%= button_to 'Destroy', vendor_path(vendor), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger', style: 'margin: 0;' %>
         </td>
       </tr>
     <% end %>
