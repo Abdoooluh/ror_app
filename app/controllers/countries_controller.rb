@@ -49,12 +49,17 @@ class CountriesController < ApplicationController
 
   # DELETE /countries/1 or /countries/1.json
   def destroy
-    @country.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to countries_url, notice: "Country was successfully destroyed." }
-      format.json { head :no_content }
+    if @country.cities.any?
+      redirect_to countries_url, alert: "Couldn't delete #{@country.name} as there are cities associated with this country"
+    else
+      @country.destroy!
+      respond_to do |format|
+        format.html { redirect_to countries_url, notice: "Country was successfully destroyed." }
+        format.json { head :no_content }
+      end
     end
+  rescue StandardError => e
+    redirect_to cities_url, alert: "An error occurred while trying to delete the city."
   end
 
   private

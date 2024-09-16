@@ -1,8 +1,15 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Cities" %>
 
 <h1>Cities</h1>
+
+<div id="flash-messages">
+  <% if notice %>
+    <p style="color: green"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p style="color: red"><%= alert %></p>
+  <% end %>
+</div>
 
 <div id="cities">
   <% @cities.each do |city| %>
@@ -11,10 +18,10 @@
         <%= city.name %>
       </div>
       <div class="col-md-3 mb-3">
-          <%= link_to "Show this city", city, class: 'btn btn-outline-success' %>
+        <%= link_to "Show this city", city, class: 'btn btn-outline-success' %>
       </div>
     </div>
-        <% end %>
+  <% end %>
 </div>
 
 <%= link_to "New city", new_city_path, class: 'btn btn-outline-primary' %>

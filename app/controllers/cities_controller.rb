@@ -49,12 +49,21 @@ class CitiesController < ApplicationController
 
   # DELETE /cities/1 or /cities/1.json
   def destroy
-    @city.destroy!
+    if @city.users.any?
+      redirect_to cities_url, alert: "City cannot be deleted because there are users registered to it."
+    elsif @city.vendors.any?
+      redirect_to cities_url, alert: "City cannot be deleted because there are vendors registered to it."
+    else
+      # Otherwise, delete the city
+      @city.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to cities_url, notice: "City was successfully destroyed." }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to cities_url, notice: "City was successfully destroyed." }
+        format.json { head :no_content }
+      end
     end
+  rescue StandardError => e
+    redirect_to cities_url, alert: "An error occurred while trying to delete the city."
   end
 
   private

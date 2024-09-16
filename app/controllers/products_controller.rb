@@ -50,12 +50,18 @@ class ProductsController < ApplicationController
 
   # DELETE /products/1 or /products/1.json
   def destroy
-    @product.destroy!
+    if @product.orders.any?
+      redirect_to products_url, alert: "Couldn't delete product as there are active orders for it."
+    else
+      @product.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
+        format.json { head :no_content }
+      end
     end
+  rescue StandardError => e
+    redirect_to cities_url, alert: "An error occurred while trying to delete the city."
   end
 
   private

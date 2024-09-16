@@ -2,7 +2,7 @@ class User < ApplicationRecord
   belongs_to :city
   has_one :country, through: :city
   has_secure_password
-
+  has_many :orders
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
 

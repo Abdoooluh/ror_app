@@ -6,4 +6,5 @@ class Product < ApplicationRecord
     [ "vendor" ]
   end
   belongs_to :vendor
+  has_many :orders
 end

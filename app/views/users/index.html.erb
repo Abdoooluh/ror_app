@@ -1,5 +1,14 @@
 <h1>Users</h1>
 
+<div id="flash-messages">
+  <% if notice %>
+    <p style="color: green"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p style="color: red"><%= alert %></p>
+  <% end %>
+</div>
+
 <table class="table">
   <thead>
     <tr>

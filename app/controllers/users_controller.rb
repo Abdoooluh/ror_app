@@ -44,11 +44,17 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    if @user.destroy
-      redirect_to users_url, notice: 'User was successfully destroyed.'
+    if @user.orders.any?
+      redirect_to users_url, alert: "Couldn't delete user as there are pending orders"
     else
-      redirect_to users_url, notice: "User Could Not be removed #{@user.errors}"
+      if @user.destroy
+        redirect_to users_url, notice: 'User was successfully destroyed.'
+      else
+        redirect_to users_url, notice: "User Could Not be removed #{@user.errors}"
+      end
     end
+  rescue StandardError => e
+    redirect_to cities_url, alert: "An error occurred while trying to delete the city."
   end
 
   private
