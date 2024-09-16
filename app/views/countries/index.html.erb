@@ -1,15 +1,21 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Countries" %>
 
 <h1>Countries</h1>
 
+
 <div id="countries">
   <% @countries.each do |country| %>
-    <%= render country %>
-    <p>
-      <button class="btn btn-outline-success"><%= link_to "Show this country", country, style: 'color:white; text-decoration:none' %></button>
-    </p>
+  <div class="row">
+    <div class="col-md-3 mb-3">
+      <%= country.name %>
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <p>
+        <button class="btn btn-outline-success"><%= link_to "Show this country", country, style: 'color:white; text-decoration:none' %></button>
+      </p>
+    </div>
+  </div>
   <% end %>
 </div>
 

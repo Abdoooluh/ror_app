@@ -1,9 +1,13 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  sku: MyString
+  sku: "SKU001"
+  name: "Product One"
+  description: "Description for product one."
+  unit_cost: 19.99
   vendor: one
 
 two:
-  sku: MyString
+  sku: "SKU002"
+  name: "Product Two"
+  description: "Description for product two."
+  unit_cost: 29.99
   vendor: two

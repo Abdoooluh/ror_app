@@ -1,6 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @city %>
+<%= "City: #{@city.name}" %>
+<br>
+<%= "Country: #{@city&.country&.name || 'Not Available'}" %>
+
 
 <div>
   <button class="btn btn-outline-success"><%= link_to "Edit this city", edit_city_path(@city), style: 'color:white; text-decoration:none' %></button> |

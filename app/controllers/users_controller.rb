@@ -22,10 +22,14 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
-    if @user.save
-      redirect_to @user, notice: 'User was successfully created.'
-    else
-      render :new
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to @user, notice: "User was successfully created." }
+        format.json { render :show, status: :created, location: @user }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -40,8 +44,17 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    @user.destroy
-    redirect_to users_url, notice: 'User was successfully destroyed.'
+    if @user.orders.any?
+      redirect_to users_url, alert: "Couldn't delete user as there are pending orders"
+    else
+      if @user.destroy
+        redirect_to users_url, notice: 'User was successfully destroyed.'
+      else
+        redirect_to users_url, notice: "User Could Not be removed #{@user.errors}"
+      end
+    end
+  rescue StandardError => e
+    redirect_to cities_url, alert: "An error occurred while trying to delete the city."
   end
 
   private

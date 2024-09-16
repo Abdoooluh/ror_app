@@ -18,5 +18,17 @@
   <%= @vendor.vendor_type %>
 </p>
 
+
+<p>
+  <strong>City:</strong>
+  <%= @vendor.city&.name %>
+</p>
+
+
+<p>
+  <strong>Country:</strong>
+  <%= @vendor.city&.country&.name %>
+</p>
+
 <button class="btn btn-outline-success"><%= link_to 'Edit', edit_vendor_path(@vendor), style: 'color:white; text-decoration:none' %></button> |
 <button class="btn btn-outline-warning"><%= link_to 'Back', vendors_path, style: 'color:white; text-decoration:none' %></button>

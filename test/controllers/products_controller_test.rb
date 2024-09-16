@@ -2,7 +2,7 @@ require "test_helper"
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @product = products(:one)
+    @product = products(:one) # Ensure your fixture has the new attributes or create a valid product in setup
   end
 
   test "should get index" do
@@ -17,7 +17,13 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create product" do
     assert_difference("Product.count") do
-      post products_url, params: { product: { sku: @product.sku, vendor_id: @product.vendor_id } }
+      post products_url, params: { product: { 
+        sku: "123456", 
+        name: "Test Product", 
+        description: "A description of the product", 
+        unit_cost: 9.99, 
+        vendor_id: vendors(:one).id # Ensure you have a valid vendor fixture
+      } }
     end
 
     assert_redirected_to product_url(Product.last)
@@ -34,7 +40,13 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update product" do
-    patch product_url(@product), params: { product: { sku: @product.sku, vendor_id: @product.vendor_id } }
+    patch product_url(@product), params: { product: { 
+      sku: @product.sku, 
+      name: "Updated Name", 
+      description: "Updated Description", 
+      unit_cost: 19.99, 
+      vendor_id: @product.vendor_id 
+    } }
     assert_redirected_to product_url(@product)
   end
 

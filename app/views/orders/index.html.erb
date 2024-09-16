@@ -1,16 +1,63 @@
+<div style="padding-top: 30px;">
+  <%= search_form_for @q, url: orders_path, method: :get, html: { class: 'mb-4' } do |f| %>
+    <div class="row">
+    <div class="col-md-3 mb-3">
+      <%= f.label :status_eq, "Order Status", class: 'form-label' %>
+      <%= f.select :status_eq, options_for_select(Order.statuses.keys.map { |type| [type.humanize, type] }, params.dig(:q, :status_eq)), { prompt: 'Select Status' }, class: 'form-control' %>
+    </div>
+
+  
+      <div class="col-md-3 mb-3">
+        <%= f.label :product_name_cont, "Product Name", class: 'form-label' %>
+        <%= f.search_field :product_name_cont, class: 'form-control', placeholder: 'Search by product name' %>
+      </div>
+  
+      <div class="col-md-3 mb-3">
+        <%= f.label :user_full_name_cont, "Purchaser Name", class: 'form-label' %>
+        <%= f.search_field :user_full_name_cont, class: 'form-control', placeholder: 'Search by user name' %>
+      </div>
+
+      <div class="col-md-3 mb-3" style="padding-top: 30px;">
+        <%= f.submit 'Search', class: 'btn btn-primary' %>
+      </div>
+    </div>
+
+  <% end %>
+</div>
+
+
 <p style="color: green"><%= notice %></p>
 
 <% content_for :title, "Orders" %>
 
 <h1>Orders</h1>
 
-<div id="orders">
-  <% @orders.each do |order| %>
-    <%= render order %>
-    <p>
-      <button class="btn btn-outline-success"><%= link_to "Show this order", order, style: 'color:white; text-decoration:none' %></button>
-    </p>
-  <% end %>
-</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Status</th>
+      <th>Purchaser</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
 
-<button class="btn btn-outline-primary"><%= link_to "New order", new_order_path, style: 'color:white; text-decoration:none' %></button>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.product.name %></td> <!-- Assuming Product has a name attribute -->
+        <td><%= order.status %></td>
+        <td><%= order.user.full_name %></td> <!-- Assuming User has a full_name attribute -->
+        <td style="display: flex; gap: 5px;">
+            <%= link_to "Show", order, class: 'btn btn-outline-success', style: 'margin: 0;' %>
+            <%= button_to "Edit", edit_order_path(order), class: 'btn btn-outline-primary', style: 'margin: 0;' %>
+            <%= button_to "Destroy", order, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger', style: 'margin: 0;' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @orders %> <!-- Pagination controls -->
+
+  <%= link_to "New order", new_order_path, class: 'btn btn-outline-primary' %>

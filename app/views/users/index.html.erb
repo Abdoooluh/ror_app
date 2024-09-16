@@ -16,19 +16,10 @@
         <td><%= user.full_name %></td>
         <td><%= user.email %></td>
         <td><%= user.cell_number %></td>
-        <td>
-
-    <button class = "btn btn-outline-success">
-          <%= link_to 'Show', user, style: 'color: white; text-decoration: none' %>
-    </button>
-
-    <button class = "btn btn-outline-primary">
-          <%= link_to 'Edit', edit_user_path(user), style: 'color: white; text-decoration: none' %>
-    </button>
-
-    <button class = "btn btn-outline-danger">
-          <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }, style: 'color: white; text-decoration: none' %>
-    </button>
+        <td style="display: flex; gap: 5px;">
+          <%= button_to 'Show', user_path(user), method: :get, class: 'btn btn-outline-success', style: 'margin: 0;' %>
+          <%= button_to 'Edit', edit_user_path(user), method: :get, class: 'btn btn-outline-primary', style: 'margin: 0;' %>
+          <%= button_to 'Destroy', user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger', style: 'margin: 0;' %>
         </td>
       </tr>
     <% end %>
@@ -36,6 +27,4 @@
 
 </table>
 
-<button class="btn btn-primary">  
-  <%= link_to 'New User', new_user_path, style: 'color: white; text-decoration: none' %>
-</button>
+  <%= link_to 'New User', new_user_path, class: 'btn btn-outline-primary' %>

@@ -31,9 +31,6 @@ class VendorsController < ApplicationController
 
   # PATCH/PUT /vendors/1
   def update
-    puts "HELLO"
-    puts vendor_params
-    puts "HELLO"
     if @vendor.update(vendor_params)
       redirect_to @vendor, notice: 'Vendor was successfully updated.'
     else
@@ -43,8 +40,11 @@ class VendorsController < ApplicationController
 
   # DELETE /vendors/1
   def destroy
-    @vendor.destroy
-    redirect_to vendors_url, notice: 'Vendor was successfully destroyed.'
+    if @vendor.destroy
+      redirect_to vendors_url, notice: "Vendor was successfully destroyed."
+    else
+      redirect_to users_url, notice: "Vendor Could Not be removed #{@vendor.errors}"
+    end
   end
 
   private

@@ -1,16 +1,61 @@
-<p style="color: green"><%= notice %></p>
+<div style="padding-top: 30px;">
+  <%= search_form_for @q, url: products_path, method: :get, html: { class: 'mb-4' } do |f| %>
+    <div class="row">
+      <div class="col-md-3 mb-3">
+        <%= f.label :name_cont, "Product Name", class: 'form-label' %>
+        <%= f.search_field :name_cont, class: 'form-control', placeholder: 'Search by product name' %>
+      </div>
 
-<% content_for :title, "Products" %>
+      <div class="col-md-3 mb-3">
+        <%= f.label :sku_cont, "SKU", class: 'form-label' %>
+        <%= f.search_field :sku_cont, class: 'form-control', placeholder: 'Search by SKU' %>
+      </div>
 
-<h1>Products</h1>
+      <div class="col-md-3 mb-3">
+        <%= f.label :vendor_full_name_cont, "Vendor Name", class: 'form-label' %>
+        <%= f.search_field :vendor_full_name_cont, class: 'form-control', placeholder: 'Search by vendor name' %>
+      </div>
 
-<div id="products">
-  <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <button class="btn btn-outline-success"><%= link_to "Show this product", product, style: 'color:white; text-decoration:none' %></button>
-    </p>
+      <div class="col-md-3 mb-3" style="padding-top: 30px;">
+        <%= f.submit 'Search', class: 'btn btn-primary' %>
+      </div>
+    </div>
+
   <% end %>
 </div>
 
-<button class="btn btn-outline-primary"><%= link_to "New product", new_product_path, style: 'color:white; text-decoration:none' %></button>
+
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Sku</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Unit Cost</th>
+      <th>Vendor</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.sku %></td>
+        <td><%= product.name %></td>
+        <td><%= product.description %></td>
+        <td><%= number_to_currency(product.unit_cost) %></td>
+        <td><%= product.vendor.full_name %></td>
+        <td style="display: flex; gap: 5px;">
+          <%= link_to 'Show', product_path(product), class: 'btn btn-outline-success', style: 'margin: 0;' %>
+          <%= button_to 'Edit', edit_product_path(product), class: 'btn btn-outline-primary', style: 'margin: 0;' %>
+          <%= button_to 'Destroy', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger', style: 'margin: 0;' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @products %>
+<%= link_to 'New product', new_product_path, class: 'btn btn-outline-primary' %>

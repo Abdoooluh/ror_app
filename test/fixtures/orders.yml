@@ -3,11 +3,9 @@
 one:
   user: one
   product: one
-  order_number: MyString
   status: MyString
 
 two:
   user: two
   product: two
-  order_number: MyString
   status: MyString
