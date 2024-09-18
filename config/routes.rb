@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
+  
+  devise_for :users
+  devise_for :vendors
+
+  
   resources :orders
   resources :products
   resources :cities
   resources :countries
   resources :users
   resources :vendors
+
 
   get "getCityDetails", to: "cities#getCityDetails"
 
