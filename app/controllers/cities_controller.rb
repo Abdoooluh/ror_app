@@ -1,5 +1,7 @@
 class CitiesController < ApplicationController
   before_action :set_city, only: %i[ show edit update destroy ]
+  skip_before_action :authenticate_user_or_vendor!
+
 
   # GET /cities or /cities.json
   def index

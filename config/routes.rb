@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
   
-  devise_for :users
-  devise_for :vendors
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
+  }
 
+  devise_for :vendors, controllers: {
+    registrations: 'vendors/registrations',
+    sessions: 'vendors/sessions'
+
+    
+  }
   
   resources :orders
   resources :products

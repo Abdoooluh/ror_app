@@ -9,10 +9,10 @@ const getElementByIds = (ids) =>{
   return null; 
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('turbo:load', () => {
   
-  const countrySelect = getElementByIds(['user_country_id', 'vendor_country_id'])
-  const citySelect = getElementByIds(['user_city_id', 'vendor_city_id']);
+  const countrySelect = getElementByIds(['country_select', 'user_country_id', 'vendor_country_id'])
+  const citySelect = getElementByIds(['city_select', ,'user_city_id', 'vendor_city_id']);
   
     if (countrySelect && citySelect) {
 
@@ -34,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 option.textContent = city.name;
                 citySelect.appendChild(option);
               });
+
+              citySelect.value = '';
   
               const promptOption = document.createElement('option');
               promptOption.value = '';
