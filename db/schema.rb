@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_18_104930) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_19_104325) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.integer "country_id", null: false
@@ -58,6 +58,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_18_104930) do
     t.datetime "reset_password_sent_at", precision: nil
     t.datetime "remember_created_at", precision: nil
     t.string "encrypted_password", default: "", null: false
+    t.boolean "admin", default: false
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
