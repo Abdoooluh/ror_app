@@ -7,9 +7,7 @@ Rails.application.routes.draw do
 
   devise_for :vendors, controllers: {
     registrations: 'vendors/registrations',
-    sessions: 'vendors/sessions'
-
-    
+    sessions: 'vendors/sessions' 
   }
   
   resources :orders
