@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
+  load_and_authorize_resource
 
   # GET /users
   def index
-    @users = User.all
+    # Admins can see all users, other users should not have access to this action
   end
 
   # GET /users/1
   def show
+    # Users can only see their own profile or if they're an admin
   end
 
   # GET /users/new
@@ -17,11 +18,11 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    # Users can only edit their own profile
   end
 
   # POST /users
   def create
-    @user = User.new(user_params)
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: "User was successfully created." }
@@ -54,17 +55,13 @@ class UsersController < ApplicationController
       end
     end
   rescue StandardError => e
-    redirect_to cities_url, alert: "An error occurred while trying to delete the city."
+    redirect_to users_url, alert: "An error occurred while trying to delete the user."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:city_id, :full_name, :email, :cell_number, :password, :password_confirmation)
-    end
+  # Only allow a list of trusted parameters through.
+  def user_params
+    params.require(:user).permit(:city_id, :full_name, :email, :cell_number, :password, :password_confirmation)
+  end
 end
