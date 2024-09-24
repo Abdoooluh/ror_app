@@ -1,21 +1,16 @@
 Rails.application.routes.draw do
-  
+  resources :roles
+
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
 
-  devise_for :vendors, controllers: {
-    registrations: 'vendors/registrations',
-    sessions: 'vendors/sessions' 
-  }
-  
   resources :orders
   resources :products
   resources :cities
   resources :countries
   resources :users
-  resources :vendors
 
 
   get "getCityDetails", to: "cities#getCityDetails"

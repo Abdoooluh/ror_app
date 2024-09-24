@@ -53,8 +53,6 @@ class CitiesController < ApplicationController
   def destroy
     if @city.users.any?
       redirect_to cities_url, alert: "City cannot be deleted because there are users registered to it."
-    elsif @city.vendors.any?
-      redirect_to cities_url, alert: "City cannot be deleted because there are vendors registered to it."
     else
       # Otherwise, delete the city
       @city.destroy!

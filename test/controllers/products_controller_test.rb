@@ -45,7 +45,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
       name: "Updated Name", 
       description: "Updated Description", 
       unit_cost: 19.99, 
-      vendor_id: @product.vendor_id 
+      vendor_id: @product.user_id 
     } }
     assert_redirected_to product_url(@product)
   end

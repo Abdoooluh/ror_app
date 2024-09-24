@@ -15,7 +15,7 @@ class ProductsTest < ApplicationSystemTestCase
     click_on "New product"
 
     fill_in "Sku", with: @product.sku
-    fill_in "Vendor", with: @product.vendor_id
+    fill_in "Vendor", with: @product.user_id
     click_on "Create Product"
 
     assert_text "Product was successfully created"
@@ -27,7 +27,7 @@ class ProductsTest < ApplicationSystemTestCase
     click_on "Edit this product", match: :first
 
     fill_in "Sku", with: @product.sku
-    fill_in "Vendor", with: @product.vendor_id
+    fill_in "Vendor", with: @product.user_id
     click_on "Update Product"
 
     assert_text "Product was successfully updated"

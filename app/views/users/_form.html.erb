@@ -1,76 +1,84 @@
-<%= form_with(model: user, local: true) do |form| %>
-  <div class="form-group">
-    <% if user.errors.any? %>
-      <div id="error_explanation" style= "color: red;">
-        <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-        <ul>
-          <% user.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="form-group">
-    <div class="field">
-      <%= form.label :full_name %>
-      <%= form.text_field :full_name, class: "form-control" %>
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
     </div>
-  </div>
+  <% end %>
 
+  <!-- Full Name -->
   <div class="field">
-    <%= form.label :email %>
-    <%= form.email_field :email, class: "form-control" %>
-  </div>
-  
-<div class="form-group">
-    <div class="field">
-      <%= form.label :cell_number %>
-      <%= form.text_field :cell_number, class: "form-control" %>
-    </div>
-</div>
-
-  <div class="form-group">
-    <div class="field">
-      <%= form.label :password %>
-      <%= form.password_field :password, class: "form-control" %>
-    </div>
+    <%= f.label :full_name %>
+    <%= f.text_field :full_name %>
   </div>
 
-  <div class="form-group">
-    <div class="field">
-      <%= form.label :password_confirmation %>
-      <%= form.password_field :password_confirmation, class: "form-control" %>
-    </div>
-  </div>
-
-  <br>
-
-<div class="form-group">
+  <!-- Email -->
   <div class="field">
-    <%= form.label :country_id %>
-    <%= form.collection_select :country_id, Country.all, :id, :name, prompt: "Select a country", id: 'country_select' %>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
   </div>
-</div>
 
-<br>
-
-<div class="form-group">
+  <!-- Cell Number -->
   <div class="field">
-    <%= form.label :city_id %>
-    <%= form.collection_select :city_id, [], :id, :name, prompt: "Select a city", id: 'city_select' %>
+    <%= f.label :cell_number %>
+    <%= f.text_field :cell_number %>
   </div>
-</div>
 
-  <br>
-
-  <div class="form-group">
-    <div class="actions">
-      <%= form.submit %>
-    </div>
+  <!-- Password -->
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
   </div>
-  
-  <br>
 
+  <!-- Password Confirmation -->
+  <div class="field">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <!-- City -->
+  <div class="field">
+    <%= f.label :city_id, "City" %>
+    <%= f.collection_select :city_id, City.all, :id, :name, prompt: "Select City" %>
+  </div>
+
+  <!-- Role (Customer or Vendor) -->
+  <div class="field">
+    <%= f.label :role_id, "Role" %>
+    <%= f.collection_select :role_id, Role.all, :id, :name, prompt: "Select Role" %>
+  </div>
+
+  <!-- Vendor Type (Conditional) -->
+  <div class="field" id="vendor_type_field" style="display: none;">
+    <%= f.label :vendor_type, "Vendor Type" %>
+    <%= f.select :vendor_type, options_for_select([["Individual", "individual"], ["Business", "business"]]), prompt: "Select Vendor Type" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const roleSelect = document.querySelector("#user_role_id");
+    const vendorTypeField = document.querySelector("#vendor_type_field");
+
+    function toggleVendorType() {
+      const selectedRole = roleSelect.options[roleSelect.selectedIndex].text.toLowerCase();
+      if (selectedRole === "vendor") {
+        vendorTypeField.style.display = "block";
+      } else {
+        vendorTypeField.style.display = "none";
+      }
+    }
+
+    roleSelect.addEventListener("change", toggleVendorType);
+
+    toggleVendorType();
+  });
+</script>

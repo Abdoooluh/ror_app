@@ -1,4 +1,4 @@
-<h2>Sign up as a User</h2>
+<h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
@@ -37,7 +37,14 @@
 
   <div class="form-group">
     <%= label_tag :city_id, "City" %>
-    <%= f.collection_select :city_id, [], :id, :name, prompt: "Select a city", id: 'city_select' %>
+    <%= f.collection_select :city_id, [], :id, :name, prompt: "Select a city", id: 'city_select', class: "form-control" %>
+  </div>
+
+  <br>
+
+  <div class="form-group">
+    <%= label_tag :role_id, "Role" %>
+    <%= f.collection_select :role_id, Role.all, :id, :name, prompt: "Select your role", id: 'role_select', class: "form-control" %>
   </div>
 
   <br>
@@ -51,5 +58,4 @@
 
 <div style="display: flex; gap: 5px;">
   <%= link_to 'Log in instead', new_user_session_path, class: "btn btn-outline-warning" %>
-  <%= link_to 'Sign up as Vendor', new_vendor_registration_path, class: "btn btn-outline-primary" %>
 </div>

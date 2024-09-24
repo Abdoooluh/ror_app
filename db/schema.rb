@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_19_104325) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_24_074513) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.integer "country_id", null: false
@@ -37,13 +37,19 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_19_104325) do
 
   create_table "products", force: :cascade do |t|
     t.string "sku"
-    t.integer "vendor_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
     t.float "unit_cost"
     t.string "description"
-    t.index ["vendor_id"], name: "index_products_on_vendor_id"
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_products_on_user_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -59,31 +65,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_19_104325) do
     t.datetime "remember_created_at", precision: nil
     t.string "encrypted_password", default: "", null: false
     t.boolean "admin", default: false
+    t.integer "role_id", default: 2, null: false
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
-  create_table "vendors", force: :cascade do |t|
-    t.integer "city_id", null: false
-    t.string "full_name"
-    t.string "password_digest"
-    t.string "email"
-    t.string "cell_number"
-    t.string "vendor_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at", precision: nil
-    t.datetime "remember_created_at", precision: nil
-    t.string "encrypted_password", default: "", null: false
-    t.index ["city_id"], name: "index_vendors_on_city_id"
-    t.index ["reset_password_token"], name: "index_vendors_on_reset_password_token", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
   add_foreign_key "cities", "countries"
   add_foreign_key "orders", "products"
   add_foreign_key "orders", "users"
-  add_foreign_key "products", "vendors"
+  add_foreign_key "products", "users"
   add_foreign_key "users", "cities"
-  add_foreign_key "vendors", "cities"
+  add_foreign_key "users", "roles"
 end

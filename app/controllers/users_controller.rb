@@ -3,12 +3,18 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    # Admins can see all users, other users should not have access to this action
+    if current_user.admin?
+      @users = User.all
+    else
+      redirect_to root_path, alert: "You are not authorized to view this page."
+    end
   end
 
   # GET /users/1
   def show
-    # Users can only see their own profile or if they're an admin
+    unless current_user.admin? || current_user == @user
+      redirect_to root_path, alert: "You are not authorized to view this page."
+    end
   end
 
   # GET /users/new
@@ -18,11 +24,14 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    # Users can only edit their own profile
+    unless current_user.admin? || current_user == @user
+      redirect_to root_path, alert: "You are not authorized to edit this profile."
+    end
   end
 
   # POST /users
   def create
+    @user.role = Role.find(params[:user][:role_id]) # Assign the selected role
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: "User was successfully created." }
@@ -46,12 +55,12 @@ class UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     if @user.orders.any?
-      redirect_to users_url, alert: "Couldn't delete user as there are pending orders"
+      redirect_to users_url, alert: "Couldn't delete user as there are pending orders."
     else
       if @user.destroy
         redirect_to users_url, notice: 'User was successfully destroyed.'
       else
-        redirect_to users_url, notice: "User Could Not be removed #{@user.errors}"
+        redirect_to users_url, notice: "User could not be removed: #{@user.errors.full_messages.join(', ')}"
       end
     end
   rescue StandardError => e
@@ -60,8 +69,8 @@ class UsersController < ApplicationController
 
   private
 
-  # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:city_id, :full_name, :email, :cell_number, :password, :password_confirmation)
+    permitted_params = [:city_id, :full_name, :email, :cell_number, :password, :password_confirmation, :role_id]
+    params.require(:user).permit(permitted_params)
   end
 end
