@@ -1,13 +1,13 @@
-one:
-  sku: "SKU001"
-  name: "Product One"
-  description: "Description for product one."
+wrone:
+  sku: 'SKU001'
+  name: 'Product One'
+  description: 'Description for product one.'
   unit_cost: 19.99
   vendor: one
 
 two:
-  sku: "SKU002"
-  name: "Product Two"
-  description: "Description for product two."
+  sku: 'SKU002'
+  name: 'Product Two'
+  description: 'Description for product two.'
   unit_cost: 29.99
   vendor: two

@@ -30,43 +30,43 @@
 <% content_for :title, "Orders" %>
 
 <h1>Orders</h1>
+<% if @orders.empty? %>
+  <h4> No orders found for current selection </h4>
+<% else %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Status</th>
+        <th>Purchaser</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Product</th>
-      <th>Status</th>
-      <th>Purchaser</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @orders.each do |order| %>
-      <% if can? :read, order %>
-        <tr>
-          <td><%= order.product.name %></td> <!-- Assuming Product has a name attribute -->
-          <td><%= order.status %></td>
-          <td><%= order.user.full_name %></td> <!-- Assuming User has a full_name attribute -->
-          <td style="display: flex; gap: 5px;">
-              <% if can? :read, order %>
-                <%= link_to "Show", order, class: 'btn btn-outline-success', style: 'margin: 0;' %>
-              <% end %>
-              <% if can? :edit, order %>
-                <%= button_to "Edit", edit_order_path(order), class: 'btn btn-outline-primary', style: 'margin: 0;' %>
-              <% end %>
-              <% if can? :delete, order %>
-                <%= button_to "Destroy", order, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger', style: 'margin: 0;' %>
-              <% end %>
-          </td>
-        </tr>
+    <tbody>
+      <% @orders.each do |order| %>
+        <% if can? :read, order %>
+          <tr>
+            <td><%= order.product.name %></td> <!-- Assuming Product has a name attribute -->
+            <td><%= order.status %></td>
+            <td><%= order.user.full_name %></td> <!-- Assuming User has a full_name attribute -->
+            <td style="display: flex; gap: 5px;">
+                <% if can? :read, order %>
+                  <%= link_to "Show", order, class: 'btn btn-outline-success', style: 'margin: 0;' %>
+                <% end %>
+                <% if can? :edit, order %>
+                  <%= button_to "Edit", edit_order_path(order), class: 'btn btn-outline-primary', style: 'margin: 0;' %>
+                <% end %>
+                <% if can? :delete, order %>
+                  <%= button_to "Destroy", order, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger', style: 'margin: 0;' %>
+                <% end %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+<% end %>
 
 <%= paginate @orders %> <!-- Pagination controls -->
-
-<% if can? :create, Order %>
-  <%= link_to "New order", new_order_path, class: 'btn btn-outline-primary' %>
-<% end %>
+  
